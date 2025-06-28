@@ -18,13 +18,13 @@ export async function POST(req: Request) {
           product_data: {
             name: item.name,
           },
-          unit_amount: item.price * 100, // cents
+          unit_amount: item.price * 100,
         },
         quantity: item.quantity,
       })),
       mode: 'payment',
-      success_url: 'http://localhost:3000/success',
-      cancel_url: 'http://localhost:3000/cancel',
+      success_url: 'https://solevibe-store.vercel.app/success',
+      cancel_url: 'https://solevibe-store.vercel.app/cancel',
     });
 
     return NextResponse.json({ sessionId: session.id });
