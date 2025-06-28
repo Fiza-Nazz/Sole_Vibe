@@ -21,13 +21,15 @@ export default function Page() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        // 🔁 LOCALHOST URL changed to Next.js internal API route
-        const res = await fetch("http://localhost:3000/api/products", {
-          cache: "no-store",
+        // ✅ RELATIVE URL for API works both on localhost & Vercel
+        const res = await fetch("/api/products", {
+          cache: "no-store", // Don't cache the response
         });
+
         if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
+          throw new Error(`HTTP error! status: ${res.status}`);
         }
+
         const data = await res.json();
         setProducts(data);
       } catch (err) {
@@ -44,7 +46,6 @@ export default function Page() {
       <Navbar />
       <HomeSection />
       <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        {/* 🔥 Updated Heading Starts */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-12 leading-tight tracking-tight">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-black via-gray-800 to-black">
             Welcome to
@@ -56,7 +57,6 @@ export default function Page() {
             Your Ultimate ShoeStore Experience
           </span>
         </h1>
-        {/* 🔥 Updated Heading Ends */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.length > 0 ? (
